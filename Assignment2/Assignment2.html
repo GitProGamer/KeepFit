@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+    
+    // 5 string methods
+     let text = "5";
+document.getElementById("demoP").innerHTML = text.padStart(4,"x");
+console.log(text.padStart(4,"x"));
+
+let text2 = "5";
+document.getElementById("demoE").innerHTML = text2.padEnd(4,"x");
+console.log(text2.padEnd(4,"x"));
+
+let text3 = "a,b,c,d,e,f";
+const myArray = text3.split(",");
+document.getElementById("demoS").innerHTML = myArray[0];
+console.log(myArray[0]);
+
+var text4 = "HELLO WORLD";
+document.getElementById("demoC").innerHTML = text4.charAt(0);
+console.log(text4.charAt(0));
+
+let textA = "Hello";
+let textB = "World!";
+let textC = textA.concat(" ",textB);
+document.getElementById("demoCO").innerHTML = textC;
+console.log(textC);
+
+// 5 array method
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+console.log(fruits.toString());
+
+const fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+
+console.log(fruits2.join(" * "));
+
+
+const fruits3 = ["Banana", "Orange", "Apple", "Mango"];
+
+console.log(fruits3);
+fruits3.pop();
+
+console.log(fruits3);
+
+const fruits4 = ["Banana", "Orange", "Apple", "Mango"];
+
+console.log(fruits4);
+
+fruits4.push("Kiwi");
+
+console.log(fruits4);
+
+const fruits5 = ["Banana", "Orange", "Apple", "Mango"];
+
+console.log(fruits5);
+
+fruits5.shift();
+
+console.log(fruits5);
+
+
+
+
+
+
+
+
+
+
+    });
+   </script>
+
+
+
+
+<title>Assignment 2 </title>
+<style>
+body {
+  background-color: lightblue;
+}
+
+@media (min-width: 360px) {
+  body {
+   
+    background: #FAEBD7;
+
+   
+  }
+
+  
+}
+
+@media (min-width: 500px) {
+  .seven-day-fc .temp-low,
+  .seven-day-fc .temp-high {
+    display: inline-block;
+    width: 45%;
+    background: #00FFFF;
+  }
+
+  .seven-day-fc .seven-day-temp {
+    margin-left: 5%;
+  }
+
+  .seven-day-fc .icon {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (min-width: 700px) {
+  .weather-forecast {
+    width: 700px;
+  }
+}
+
+@media (min-width: 575px) {
+  body{
+	 background: #7FFFD4;
+  }
+  article {
+    width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+h1 {
+  color: red;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
+</head>
+
+
+<body>
+
+  <h1>Assingnment 2</h1>
+<p>This is a paragraph.</p>
+<h2>First JavaScript</h2>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+
+<h2>Check Console.log for full OutPut</h2>
+
+<p>The padStart() method pads a string with another string:</p>
+
+<p id="demoP"></p>
+
+<p>The padEnd() method pads a string with another string:</p>
+
+<p id="demoE"></p>
+
+<p>Display the first array element, after a string split:</p>
+
+<p id="demoS"></p>
+
+<p>The charAt() method returns the character at a given position in a string:</p>
+
+<p id="demoC"></p>
+
+<p>The concat() method joins two or more strings:</p>
+
+<p id="demoCO"></p>
+
+<p> This is Vue Hello Vue Test </p>
+
+<div id="app">
+  <component-c></component-c>
+  {{ message }}
+
+
+  <form>
+    <component-a inline-template>
+      <div>
+        <label>Email:</label>
+  <input type = "email" required v-model.lazy="email">
+
+  <label>Password:</label>
+  <input type = "password" required v-model.lazy="password">
+   </div>
+  </component-a>
+        
+     
+  
+ 
+<div>
+  <br>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+<label for="jack">Jack</label>
+<input type="checkbox" id="john" value="John" v-model="checkedNames">
+<label for="john">John</label>
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+<label for="mike">Mike</label>
+<br>
+<span>Checked names: {{ checkedNames }}</span>
+</br>
+</div>
+
+</form>
+
+<p>Email: {{ email }}</p>
+<p>Password: {{ password }}</p>
+
+
+  <component-b></component-b>
+  
+
+</div>
+
+
+<script>
+
+Vue.component('component-c', {
+    template: '<h1>Hello World  From vue Component !!!</h1>'
+})
+
+Vue.component('component-a', { })
+
+
+
+var ComponentB = {
+
+     template: '<h1>Enter Email and PassWord and then click on any empty space to show result </h1>'
+  
+}
+
+  var app = new Vue({
+  el: '#app',
+
+  components: {
+    'component-b': ComponentB
+  },
+  data()  {
+    return {
+      // Hello Vue
+    message: 'Hello Vue!',
+    email: '',
+    password: '',
+    checkedNames: []
+    
+    }  
+  }
+  
+  
+})
+</script>
+
+</body>
+</html>
