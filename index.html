@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Created By Jason Stark -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeepFit Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+
+
+    <style>
+        body {     /*  Define Basic Size for Text */
+            font-size: 25px;
+        }
+
+        @media (min-width: 480px) {   /*  Scale Text According to the width screen */
+            body {
+
+                font-size: 20px;
+
+
+            }
+
+
+        }
+
+
+
+        .nav {   /*  Give Basic style for the Nav Bar */
+            display: block;
+            padding: 1%;
+
+            text-align: center;
+
+            background-color: #FF6347;
+            position: -webkit-sticky;
+            /* Safari */
+            position: sticky;
+            top: 0;
+
+        }
+
+        .navcontent:hover {   /*  Show  effects when hover Nav Items */
+            background-color: #111;
+        }
+
+        .navcontent {   /*  Give basic style  for the nav content inside */
+            font-size: 25px;
+            color: white;
+            padding-left: 2%;
+            text-decoration: none;
+            list-style-type: none;
+            margin: 0;
+
+            overflow: hidden;
+        }
+
+
+        h1 {
+            text-align: center;
+        }
+
+        img {   /*  Make sure images can cover the whole width of the screen */
+
+            width: 100%;
+        }
+
+        .BMI {   /*  Keep the BMI form at the Centre */
+
+            text-align: center;
+        }
+
+        .button {  /*  Give the basic style for the button */
+
+            border: none;
+
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: 2px solid #f44336;
+
+
+        }
+
+        .button:hover {    /*  Show some effects When Mouse hover the button */
+            background-color: #f44336;
+            color: white;
+        }
+
+        .footer {     /*  Make sure the footer is always at the centre and give it a solid background colour as well as keep some distance with other contents */
+
+            left: 0;
+            bottom: 0;
+            padding-top: 1px;
+            margin-top: 30px;
+            width: 100%;
+            background-color: silver;
+            color: white;
+            text-align: center;
+        }
+
+
+
+        input[type=text],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /*  make the TextArea big enough and keep the space */
+            margin-top: 6px;
+            /*  between each elemnts */
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #0099ff;
+            /*  Customize the Submit Button*/
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+
+        }
+
+        input[type=submit]:hover {
+            /*  When hover over the submit button */
+            background-color: #0077b3;
+            /*  change the colour to dark blue */
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            /*  Setup basic structure for all the main elemnts */
+            padding: 20px;
+        }
+
+        .home {
+            font-size: 26px;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <div id="app">
+
+        <h1>The KeepFit Website</h1>
+
+
+      <!--  Nav Bar section -->
+
+        <div class="nav">
+            <router-link to="/" class="navcontent" onclick="hide()">Home</router-link>
+            <router-link to="/component2" class="navcontent" onclick="show()">BMI Calculator</router-link>
+            <router-link to="/component3" class="navcontent" onclick="hide()">General Health</router-link>
+            <router-link to="/component4" class="navcontent" onclick="hide()">Weight Loss Tips</router-link>
+            <router-link to="/component5" class="navcontent" onclick="hide()">Muscle Growth Tips</router-link>
+            <router-link to="/component6" class="navcontent" onclick="hide()">Contact</router-link>
+
+        </div>
+
+        <router-view> </router-view>
+
+
+
+       <!-- BMI from section hide and show according to need -->
+
+        <div id="BMIFORM">
+
+            <component-a title="Please input Your Weight and Height info to get your BMI result"
+                style="color:red;text-align:center;">
+
+            </component-a>
+
+            <div class="BMI">
+                <div>
+                    <label>Your Weight in KG:</label>
+                    <input type="num1" required v-model.lazy.number="number1">
+                    <label>Your Height in CM:</label>
+                    <input type="num2" required v-model.lazy.number="number2">
+                </div>
+                <button @click="getbmi()" class="button">GerResult</button>
+                <p>Your BMI is: {{ result }}</p>
+            </div>
+
+        </div>
+
+
+        
+
+
+       <!-- Footer Area for the Bottom -->
+
+        <div class="footer">
+            <footer>
+                <div> {{ message | capitalize }}</div>
+
+                <input type="submit" value="Show/Hide Help Info" @click="show = !show">
+
+                <h3 v-if="show">Please use the Nav bar to jump to different content, if you can't see the BMI calculator, simply click on the BMI calculator on the Nav bar to Reload</h3>
+                <h3 v-else></h3>
+            </footer>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+
+
+        // show BMI form
+        function show() {
+            var x = document.getElementById("BMIFORM");
+
+            x.style.display = "block";
+
+
+
+        }
+              // hide BMI form
+        function hide() {
+            var x = document.getElementById("BMIFORM");
+            x.style.display = "none";
+        }
+
+        var ComponentB = {
+
+            template: '<div><slot></slot></div>'     // Place holder for Display text
+
+        }
+
+        let mixin = {
+            created: function () {
+                this.hideBMI()         // when website Loaded hide the BMI form first until further action
+            },
+            methods: {
+                hideBMI: function () {
+                    var x = document.getElementById("BMIFORM");
+                    x.style.display = "none";
+                }
+            }
+        }
+
+        const Component1 = { template: '<div> <div class = "home"> <h1> Home </h1> <p>Hi ! Welcome to the KeepFit website !! regardless your goal is to lose weight or builiding muscle, or just want some simple advice about keeping healthy, feel free to have a look ! oh, by the way you can also use the BMI Calculator  to check your current BMI level ! Have fun on KeepFit ! :D</p></div> <img src="images/BMI.jpeg" alt="BMI" height="400"> <img src="images/Runing.jpeg" alt="Runing" height="300"> <img src="images/LoseWeight.jpeg" alt="WeightLose" height="400"> <img src="images/Bicept.jpeg" alt="Muscle Growth" height="400"></div>' }
+
+        const Component2 = { template: '<div><h1> BMI Calculator </h1> <img src="images/BMI.jpeg" alt="BMI" height="400"> </div>' }
+        const Component3 = { template: ` <div> <h1> General Health </h1> <img src="images/Runing.jpeg" alt="Runing" height="300"> <h3> As the best investment is also invest on the health, here are some tips for a better health both emotionaly and physically:</h3> <ul> <li>Quit Smoking</li> <li>Drink Enough Water</li> <li>Avoid high sugar and salt diet</li> <li>Avoid sitting for a long time</li> <li>Keep regular exercise</li> <li>Listen to clam music</li> <li>Eat more green vegetables</li> <li>Talking more often with friends and family</li> </ul></div>` }
+
+
+        const Component4 = { template: '<div><h1> Weight Loss Tips</h1> <img src="images/LoseWeight.jpeg" alt="WeightLose" height="400"> <component-b> <p>In order to achieve weight loss goal, here are the things to keep in mind:</p> <ul> <li>Drink Plenty of water</li> <li>Avoid eating too much food which is rich in Carb</li> <li>Avoid eating snacks, eat the snack as part of your meal</li> <li>Avoid eating too much highly processed food</li> <li>Avoid soft drinks and any drink which is high in sugar</li> <li>Ensure the quality of sleep time</li> <li>Doing highily burning fat sports like swiming and runing</li> <li>Builiding more muscle mass as muscle helps to increase your daily basic energy consumption</li> </ul> </component-b> </div>' }
+        const Component5 = { template: '<div><h1> Muscle Growth Tips</h1> <img src="images/Bicept.jpeg" alt="Muscle Growth" height="400"> <p>According to Wikipedia, There are 3 main Stages for Muscle Building : </p> <ul> <li>Strength training through weights or elastic/hydraulic resistance.</li> <li>Specialized nutrition,incorporating extra protein and supplements when necessary.</li> <li>Adequate rest, including sleep and recuperation between workouts.</li> </ul> <p>In order for muscle to grow, it has first need to be "break apart" and the brain will realise the "broken" part of the muscle and then trying to recover it by fuses muscle fibers together and by repetating this process, the part of the muscle will grow bigger and bigger and thats how we achieve muscle growth. </p> <p>So the muscle growing process is we first need to do the weight training in order to "break" the muscle apart, and then by eating more protein and taking regular breaks, the body will recover the broken muscle by excess amount and thats how muscle can be grown. </p><div>' }
+
+        const Component6 = { template: '<div><h1>Contact Page</h1> <div class="container"> <label for="fullname">Full Name</label> <input type="text" id="fullname" name="fullname" placeholder="Your full name.."> <label for="email">Email</label> <input type="text" id="email" name="email" placeholder="Your Email Address.."> <label for="country">Country</label> <select id="country" name="country"> <option value="australia">Australia</option> <option value="japan">Japan</option> <option value="usa">USA</option> </select> <label for="enquire">Enquire</label> <textarea id="enquire" name="enquire" placeholder="What is your Enquire ?" style="height:300px"></textarea> <input type="submit" value="Submit"> </div></div>' }
+        // Routers to map to compoents
+
+        const routes = [
+            { path: '/', component: Component1 },
+            { path: '/component2', component: Component2 },
+            { path: '/component3', component: Component3 },
+            { path: '/component4', component: Component4 },
+            { path: '/component5', component: Component5 },
+            { path: '/component6', component: Component6 },
+        ]
+
+        const router = new VueRouter({
+            routes: routes
+        });
+
+
+        Vue.component('component-a', {    // Pass Title Data by Props 
+            props: ['Title'],
+            template: '<h3>{{ Title }}</h3>'
+        })
+
+
+        new Vue({
+            el: "#app",
+            mixins: [mixin],
+            filters: {
+                capitalize: function (value) {    // Turn All text Into UpperCase
+                    if (!value) return ''
+                    value = value.toString()
+                    return value.toUpperCase()
+                }
+            },
+
+            components: {
+                'component-b': ComponentB    // Register Component B 
+            },
+
+
+
+
+            router: router,
+
+
+            data() {         // Initializing Data to start with
+                return {
+                    message: "Thank you for your visit !",
+                    show: true,
+                    number1: 0,
+                    number2: 0,
+                    result: 0,
+
+
+                }
+            },
+
+            methods: {  // Calculate The BMI value based  on User Inputs 
+                getbmi: function () {
+                    this.result = (this.number1 / this.number2 / this.number2) * 10000
+                },
+
+                hideBMI: function () {   // hide BMI form 
+                    var x = document.getElementById("BMIFORM");
+                    x.style.display = "none";
+                }
+            }
+
+
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>
